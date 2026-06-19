@@ -3,10 +3,23 @@ import type { Metadata } from "next"
 import { externalLinks } from "@/lib/content"
 
 const productionUrl = "https://synthify.org"
+const vercelUrl =
+  process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL
+
+function normalizeSiteUrl(url: string) {
+  const withProtocol = /^https?:\/\//.test(url) ? url : `https://${url}`
+
+  return withProtocol.replace(/\/$/, "")
+}
+
+export const ogImagePath = "/opengraph-image"
+export const twitterImagePath = "/twitter-image"
 
 export const siteConfig = {
   name: "Synthify",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? productionUrl,
+  url: normalizeSiteUrl(
+    process.env.NEXT_PUBLIC_SITE_URL ?? vercelUrl ?? productionUrl
+  ),
   description:
     "Synthify is an international student-led organization publishing accessible STEM magazines written by high school students.",
   ogImageAlt:
@@ -53,9 +66,10 @@ export function createPageMetadata({
       type: "website",
       images: [
         {
-          url: "/opengraph-image",
+          url: ogImagePath,
           width: 1200,
           height: 630,
+          type: "image/png",
           alt: siteConfig.ogImageAlt,
         },
       ],
@@ -64,7 +78,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: `${title} | ${siteConfig.name}`,
       description,
-      images: ["/opengraph-image"],
+      images: [twitterImagePath],
     },
   }
 }
@@ -126,7 +140,9 @@ export function createWebPageJsonLd({
   }
 }
 
-export function createBreadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
+export function createBreadcrumbJsonLd(
+  items: Array<{ name: string; path: string }>
+) {
   const currentUrl = absoluteUrl(items.at(-1)?.path ?? "/")
 
   return {

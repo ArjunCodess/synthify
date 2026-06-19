@@ -9,8 +9,10 @@ import { SiteHeader } from "@/components/site/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import {
   createJsonLdGraph,
+  ogImagePath,
   organizationJsonLd,
   siteConfig,
+  twitterImagePath,
   websiteJsonLd,
 } from "@/lib/seo"
 import { cn } from "@/lib/utils"
@@ -67,9 +69,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: ogImagePath,
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: siteConfig.ogImageAlt,
       },
     ],
@@ -78,7 +81,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Synthify | Student-Led STEM Magazines",
     description: siteConfig.description,
-    images: ["/opengraph-image"],
+    images: [twitterImagePath],
   },
 }
 
@@ -111,9 +114,7 @@ export default function RootLayout({
       )}
     >
       <body>
-        <JsonLd
-          data={createJsonLdGraph([organizationJsonLd, websiteJsonLd])}
-        />
+        <JsonLd data={createJsonLdGraph([organizationJsonLd, websiteJsonLd])} />
         <ThemeProvider>
           <TooltipProvider>
             <div className="flex min-h-dvh flex-col">
