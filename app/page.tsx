@@ -1,35 +1,60 @@
 import Image from "next/image"
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
-import {
-  ArrowRight02Icon,
-  BookOpen01Icon,
-  GlobalIcon,
-  LibraryIcon,
-} from "@hugeicons/core-free-icons"
+import { ArrowRight02Icon, GlobalIcon } from "@hugeicons/core-free-icons"
 
 import { MagazineCard } from "@/components/site/magazine-card"
 import { SectionHeading } from "@/components/site/section-heading"
 import { buttonVariants } from "@/components/ui/button-variants"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { JsonLd } from "@/components/seo/json-ld"
 import { Separator } from "@/components/ui/separator"
-import { externalLinks, executives, magazines, stats } from "@/lib/content"
-import {
-  createJsonLdGraph,
-  createWebPageJsonLd,
-  siteConfig,
-} from "@/lib/seo"
+import { externalLinks, executives, magazines } from "@/lib/content"
+import { createJsonLdGraph, createWebPageJsonLd, siteConfig } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 export default function Page() {
   const featuredIssues = magazines.slice(-2).reverse()
   const featuredExecutives = executives.slice(0, 3)
+  const publicationSteps = [
+    {
+      step: "Pitch",
+      title: "Choose a question worth reading",
+      body: "Members start with teen-readable STEM questions, then shape article angles around curiosity, accuracy, and access.",
+    },
+    {
+      step: "Draft",
+      title: "Turn research into plain language",
+      body: "Writers build article drafts that keep scientific depth without asking readers to decode academic language.",
+    },
+    {
+      step: "Edit",
+      title: "Refine structure, claims, and pacing",
+      body: "Editors check clarity, flow, and publication standards before work moves into magazine layout.",
+    },
+    {
+      step: "Publish",
+      title: "Design, release, and distribute",
+      body: "Layout and outreach teams prepare readable issues for online readers and physical donation partners.",
+    },
+  ]
+  const impactStats = [
+    {
+      value: "40+",
+      label: "members",
+      detail: "coordinating writing, editing, layout, and outreach",
+    },
+    {
+      value: "9+",
+      label: "countries",
+      detail: "bringing student science perspectives across time zones",
+    },
+    {
+      value: "20+",
+      label: "high schools",
+      detail: "feeding each issue with different classrooms and communities",
+    },
+  ]
   const title = "Synthify | Student-Led STEM Magazines"
   const description = siteConfig.description
 
@@ -98,17 +123,21 @@ export default function Page() {
                 Read magazines
               </Link>
             </div>
+            <p className="max-w-xl text-sm leading-6 text-white/68">
+              The application opens in Google Forms and covers writing, editing,
+              layout, outreach, and general member interest.
+            </p>
           </div>
 
           <div className="flex items-center justify-center lg:justify-end">
             <div className="relative min-h-[430px] w-full max-w-lg sm:min-h-[520px]">
-              <div className="absolute left-0 top-14 aspect-[595/842] w-[58%] rotate-[-8deg] overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur-md sm:w-[52%]">
+              <div className="absolute top-14 left-0 aspect-[595/842] w-[58%] rotate-[-8deg] overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur-md sm:w-[52%]">
                 <Image
                   src={magazines[2].coverSrc}
                   alt={`${magazines[2].title} cover`}
                   fill
                   sizes="(max-width: 768px) 48vw, 260px"
-                  className="object-cover p-3 opacity-82 rounded-4xl"
+                  className="rounded-4xl object-cover p-3 opacity-82"
                 />
               </div>
               <div className="relative ml-auto aspect-[595/842] w-[76%] max-w-sm overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur-md sm:w-[68%]">
@@ -118,7 +147,7 @@ export default function Page() {
                   fill
                   priority
                   sizes="(max-width: 768px) 70vw, 360px"
-                  className="object-cover p-3 rounded-4xl"
+                  className="rounded-4xl object-cover p-3"
                 />
               </div>
             </div>
@@ -128,15 +157,20 @@ export default function Page() {
 
       <section className="border-b border-border bg-paper">
         <div className="mx-auto grid max-w-7xl gap-0 px-4 py-8 sm:px-6 md:grid-cols-3 lg:px-8">
-          {stats.map((stat, index) => (
-            <div key={stat.label} className="flex flex-col gap-2 py-5 md:px-6">
+          {impactStats.map((stat, index) => (
+            <div key={stat.label} className="flex flex-col gap-3 py-5 md:px-6">
               <p className="font-heading text-5xl leading-none text-primary">
                 {stat.value}
               </p>
-              <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
-                {stat.label}
-              </p>
-              {index < stats.length - 1 ? (
+              <div className="flex max-w-xs flex-col gap-1">
+                <p className="text-sm font-medium text-foreground">
+                  {stat.label}
+                </p>
+                <p className="text-sm leading-6 text-muted-foreground">
+                  {stat.detail}
+                </p>
+              </div>
+              {index < impactStats.length - 1 ? (
                 <Separator className="mt-4 md:hidden" />
               ) : null}
             </div>
@@ -145,52 +179,37 @@ export default function Page() {
       </section>
 
       <section className="editorial-grid bg-background">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-8">
           <SectionHeading
             eyebrow="What we do"
             title="Publishing is the engine. Access is the point."
             description="Synthify turns student curiosity into magazines that can be shared online and distributed physically to libraries, organizations, and schools."
           />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              {
-                title: "Write",
-                icon: BookOpen01Icon,
-                body: "Students research STEM topics and shape them for readers who want depth without jargon.",
-              },
-              {
-                title: "Edit",
-                icon: LibraryIcon,
-                body: "Editorial members refine structure, clarity, pacing, and publication standards.",
-              },
-              {
-                title: "Design",
-                icon: BookOpen01Icon,
-                body: "Layout members make complex scientific work readable through visual hierarchy.",
-              },
-              {
-                title: "Donate",
-                icon: GlobalIcon,
-                body: "Outreach members help magazines reach schools, libraries, and partner organizations.",
-              },
-            ].map((item) => (
-              <Card key={item.title} className="bg-card/88">
-                <CardHeader className="gap-5">
-                  <div className="flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                    <HugeiconsIcon icon={item.icon} strokeWidth={1.8} />
-                  </div>
-                  <CardTitle className="font-heading text-3xl leading-none">
+          <ol className="grid gap-3">
+            {publicationSteps.map((item, index) => (
+              <li
+                key={item.step}
+                className="grid gap-3 rounded-xl border border-border bg-card/82 p-5 sm:grid-cols-[6rem_1fr]"
+              >
+                <div className="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-2">
+                  <span className="font-heading text-3xl leading-none text-primary">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">
+                    {item.step}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-heading text-2xl leading-none">
                     {item.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                  </h3>
                   <p className="text-sm leading-6 text-muted-foreground">
                     {item.body}
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
@@ -216,7 +235,11 @@ export default function Page() {
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             {featuredIssues.map((issue, index) => (
-              <MagazineCard key={issue.slug} issue={issue} priority={index === 0} />
+              <MagazineCard
+                key={issue.slug}
+                issue={issue}
+                priority={index === 0}
+              />
             ))}
           </div>
         </div>
@@ -251,7 +274,10 @@ export default function Page() {
               </Card>
             ))}
           </div>
-          <Link href="/team" className={cn(buttonVariants({ variant: "outline" }))}>
+          <Link
+            href="/team"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
             Meet the team
             <HugeiconsIcon
               icon={ArrowRight02Icon}
@@ -265,15 +291,14 @@ export default function Page() {
       <section className="bg-ink-blue text-primary-foreground">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
           <div className="flex max-w-3xl flex-col gap-4">
-            <p className="text-sm uppercase tracking-[0.18em] text-white/65">
-              Recruitment
-            </p>
             <h2 className="font-heading text-5xl leading-none text-balance md:text-7xl">
               Help build the next issue.
             </h2>
             <p className="text-base leading-7 text-white/75">
               Writers, editors, designers, and outreach members can apply
-              through the current recruitment form.
+              through the current recruitment form. No prior publication
+              experience is required; reliability, curiosity, and care matter
+              most.
             </p>
           </div>
           <a
