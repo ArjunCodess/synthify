@@ -18,18 +18,40 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { JsonLd } from "@/components/seo/json-ld"
 import { externalLinks } from "@/lib/content"
+import {
+  createBreadcrumbJsonLd,
+  createJsonLdGraph,
+  createPageMetadata,
+  createWebPageJsonLd,
+} from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
-  title: "Connect",
-  description:
-    "Contact Synthify, visit Instagram, read publications, or open the member application.",
-}
+const title = "Contact and Links"
+const description =
+  "Contact Synthify, follow the student STEM publication on Instagram, read magazine issues, or open the current member application."
+const path = "/connect"
+
+export const metadata: Metadata = createPageMetadata({
+  title,
+  description,
+  path,
+  keywords: ["contact Synthify", "Synthify Instagram", "student STEM publication"],
+})
 
 export default function ConnectPage() {
   return (
     <div className="flex flex-col">
+      <JsonLd
+        data={createJsonLdGraph([
+          createWebPageJsonLd({ path, name: title, description }),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Connect", path },
+          ]),
+        ])}
+      />
       <section className="bg-paper">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading

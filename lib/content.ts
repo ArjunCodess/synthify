@@ -13,6 +13,7 @@ export type MagazineIssue = {
   pdfHref: string
   coverSrc: string
   published: string
+  publishedDate: string
   articles: string[]
 }
 
@@ -81,6 +82,7 @@ export const magazines: MagazineIssue[] = [
     pdfHref: "/magazines/january26.pdf",
     coverSrc: "/magazine-covers/january26.png",
     published: "January 2026",
+    publishedDate: "2026-01-01",
     articles: [
       "Data-Driven Discrimination",
       "Your DNA Is Not Just Yours",
@@ -99,6 +101,7 @@ export const magazines: MagazineIssue[] = [
     pdfHref: "/magazines/march26.pdf",
     coverSrc: "/magazine-covers/march26.png",
     published: "March 2026",
+    publishedDate: "2026-03-01",
     articles: [
       "Blue Light Glasses and the Placebo Effect",
       "Designer Babies Using CRISPR Technology",
@@ -117,6 +120,7 @@ export const magazines: MagazineIssue[] = [
     pdfHref: "/magazines/april26.pdf",
     coverSrc: "/magazine-covers/april26.png",
     published: "April 2026",
+    publishedDate: "2026-04-01",
     articles: [
       "Zoonotic Spillover",
       "The Plastic Within",
@@ -138,6 +142,7 @@ export const magazines: MagazineIssue[] = [
     pdfHref: "/magazines/may26.pdf",
     coverSrc: "/magazine-covers/may26.png",
     published: "May 2026",
+    publishedDate: "2026-05-01",
     articles: [
       "Beyond Calcium",
       "The Tiny Organs Revolutionizing Modern Medicine",

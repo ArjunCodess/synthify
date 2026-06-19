@@ -17,16 +17,46 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { JsonLd } from "@/components/seo/json-ld"
 import { Separator } from "@/components/ui/separator"
 import { externalLinks, executives, magazines, stats } from "@/lib/content"
+import {
+  createJsonLdGraph,
+  createWebPageJsonLd,
+  siteConfig,
+} from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 export default function Page() {
   const featuredIssues = magazines.slice(-2).reverse()
   const featuredExecutives = executives.slice(0, 3)
+  const title = "Synthify | Student-Led STEM Magazines"
+  const description = siteConfig.description
 
   return (
     <div className="flex flex-col">
+      <JsonLd
+        data={createJsonLdGraph([
+          createWebPageJsonLd({ path: "/", name: title, description }),
+          {
+            "@type": "ItemList",
+            "@id": `${siteConfig.url}/#featured-publications`,
+            name: "Featured Synthify publications",
+            itemListElement: featuredIssues.map((issue, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "PublicationIssue",
+                name: `${siteConfig.name} ${issue.title}`,
+                url: `${siteConfig.url}${issue.pdfHref}`,
+                image: `${siteConfig.url}${issue.coverSrc}`,
+                datePublished: issue.publishedDate,
+                about: issue.theme,
+              },
+            })),
+          },
+        ])}
+      />
       <section className="soft-noise bg-ink-blue text-primary-foreground">
         <div className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
           <div className="flex flex-col justify-center gap-8">

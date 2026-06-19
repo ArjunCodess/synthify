@@ -20,18 +20,69 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { JsonLd } from "@/components/seo/json-ld"
 import { departments, externalLinks, joinFaq } from "@/lib/content"
+import {
+  absoluteUrl,
+  createBreadcrumbJsonLd,
+  createJsonLdGraph,
+  createPageMetadata,
+  createWebPageJsonLd,
+  siteConfig,
+} from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = {
-  title: "Join",
-  description:
-    "Apply to join Synthify as a writer, editor, layout member, or outreach member.",
-}
+const title = "Student Publication Applications"
+const description =
+  "Apply to join Synthify as a high school writer, editor, layout designer, outreach member, or student STEM publication contributor."
+const path = "/join"
+
+export const metadata: Metadata = createPageMetadata({
+  title,
+  description,
+  path,
+  keywords: ["join Synthify", "student publication application", "STEM writing"],
+})
 
 export default function JoinPage() {
+  const faqJsonLd = {
+    "@type": "FAQPage",
+    "@id": `${absoluteUrl(path)}#faq`,
+    mainEntity: joinFaq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  }
+
+  const joinActionJsonLd = {
+    "@type": "JoinAction",
+    target: externalLinks.application,
+    agent: {
+      "@id": `${siteConfig.url}/#organization`,
+    },
+    object: {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+    },
+  }
+
   return (
     <div className="flex flex-col">
+      <JsonLd
+        data={createJsonLdGraph([
+          createWebPageJsonLd({ path, name: title, description }),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Join", path },
+          ]),
+          faqJsonLd,
+          joinActionJsonLd,
+        ])}
+      />
       <section className="bg-ink-blue text-primary-foreground">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:px-8">
           <div className="flex flex-col gap-6">

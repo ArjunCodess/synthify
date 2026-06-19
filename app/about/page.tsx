@@ -15,17 +15,39 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { JsonLd } from "@/components/seo/json-ld"
 import { stats } from "@/lib/content"
+import {
+  createBreadcrumbJsonLd,
+  createJsonLdGraph,
+  createPageMetadata,
+  createWebPageJsonLd,
+} from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn about Synthify's mission, publication model, and student-led STEM access work.",
-}
+const title = "Mission and Impact"
+const description =
+  "Learn how Synthify publishes student-led STEM magazines, makes science accessible for teenagers, and distributes issues online and in print."
+const path = "/about"
+
+export const metadata: Metadata = createPageMetadata({
+  title,
+  description,
+  path,
+  keywords: ["student science organization", "STEM access", "science magazines"],
+})
 
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
+      <JsonLd
+        data={createJsonLdGraph([
+          createWebPageJsonLd({ path, name: title, description }),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "About", path },
+          ]),
+        ])}
+      />
       <section className="bg-ink-blue text-primary-foreground">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
           <div className="flex flex-col gap-6">
