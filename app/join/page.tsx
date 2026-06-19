@@ -2,7 +2,9 @@ import type { Metadata } from "next"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
   ArrowRight02Icon,
-  Megaphone01Icon,
+  BookOpen02Icon,
+  GlobalIcon,
+  LibraryIcon,
   SentIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -14,14 +16,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { buttonVariants } from "@/components/ui/button-variants"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { JsonLd } from "@/components/seo/json-ld"
-import { departments, externalLinks, joinFaq } from "@/lib/content"
+import { externalLinks, joinFaq } from "@/lib/content"
 import {
   absoluteUrl,
   createBreadcrumbJsonLd,
@@ -37,11 +34,62 @@ const description =
   "Apply to join Synthify as a high school writer, editor, layout designer, outreach member, or student STEM publication contributor."
 const path = "/join"
 
+const applicationNotes = [
+  "One Google Form covers writing, editing, layout, outreach, and general membership.",
+  "No prior publication experience is required; curiosity and reliability matter more.",
+  "The team follows up through the contact information submitted in the form.",
+]
+
+const roleGuides = [
+  {
+    name: "Journalism",
+    icon: BookOpen02Icon,
+    bestFor:
+      "Best if you like research, interviews, and explaining complex ideas.",
+    responsibility:
+      "Pitch article angles, gather sources, and write drafts for teen STEM readers.",
+    output: "Output: article drafts ready for editorial review.",
+  },
+  {
+    name: "Editorial",
+    icon: LibraryIcon,
+    bestFor:
+      "Best if you like structure, clarity, fact-checking, and careful pacing.",
+    responsibility:
+      "Shape drafts into publishable work while protecting accuracy and voice.",
+    output: "Output: edited articles with clearer arguments and stronger flow.",
+  },
+  {
+    name: "Layout",
+    icon: SentIcon,
+    bestFor:
+      "Best if you like visual hierarchy, readable pages, and design systems.",
+    responsibility:
+      "Turn articles into magazine spreads that help readers move through STEM topics.",
+    output:
+      "Output: readable issue pages and publication-ready visual structure.",
+  },
+  {
+    name: "Outreach",
+    icon: GlobalIcon,
+    bestFor:
+      "Best if you like partnerships, promotion, and getting issues to readers.",
+    responsibility:
+      "Build connections with schools, organizations, libraries, and online audiences.",
+    output:
+      "Output: distribution opportunities, promotion plans, and partner contact.",
+  },
+]
+
 export const metadata: Metadata = createPageMetadata({
   title,
   description,
   path,
-  keywords: ["join Synthify", "student publication application", "STEM writing"],
+  keywords: [
+    "join Synthify",
+    "student publication application",
+    "STEM writing",
+  ],
 })
 
 export default function JoinPage() {
@@ -93,6 +141,10 @@ export default function JoinPage() {
               Synthify needs students who can write carefully, edit clearly,
               design readable pages, and help magazines reach real readers.
             </p>
+            <p className="max-w-xl text-sm leading-6 text-white/68">
+              Choose the role that matches how you want to contribute. The form
+              opens externally and covers every department listed below.
+            </p>
             <a
               href={externalLinks.application}
               target="_blank"
@@ -116,18 +168,24 @@ export default function JoinPage() {
                 <HugeiconsIcon icon={SentIcon} strokeWidth={1.8} />
               </div>
               <CardTitle className="font-heading text-4xl leading-none">
-                Application form
+                Before you open the form
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 text-sm leading-6 text-white/75">
-              <p>
-                The current recruitment flow is handled through the Google Form
-                provided by Synthify.
-              </p>
-              <p>
-                Use the same form for writing, editing, layout, outreach, and
-                general member applications.
-              </p>
+            <CardContent className="flex flex-col gap-5 text-sm leading-6 text-white/75">
+              <ul className="flex flex-col gap-3">
+                {applicationNotes.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`mailto:${externalLinks.email}`}
+                className="text-white underline underline-offset-4 transition-colors hover:text-white/82"
+              >
+                If the form is unavailable, email {externalLinks.email}.
+              </a>
             </CardContent>
           </Card>
         </div>
@@ -138,22 +196,28 @@ export default function JoinPage() {
           <SectionHeading
             eyebrow="Departments"
             title="Choose where your work belongs."
-            description="The publication needs different strengths. Applicants can orient around writing, editing, design, or outreach."
+            description="Each department owns a different part of the publication cycle. Use these prompts to decide where your strengths fit."
           />
           <div className="grid gap-4 md:grid-cols-2">
-            {departments.map((department) => (
-              <Card key={department.name}>
+            {roleGuides.map((role) => (
+              <Card key={role.name}>
                 <CardHeader className="gap-5">
                   <div className="flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                    <HugeiconsIcon icon={Megaphone01Icon} strokeWidth={1.8} />
+                    <HugeiconsIcon icon={role.icon} strokeWidth={1.8} />
                   </div>
                   <CardTitle className="font-heading text-3xl leading-none">
-                    {department.name}
+                    {role.name}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col gap-4">
+                  <p className="text-sm leading-6 font-medium text-foreground">
+                    {role.bestFor}
+                  </p>
                   <p className="text-sm leading-6 text-muted-foreground">
-                    {department.description}
+                    {role.responsibility}
+                  </p>
+                  <p className="rounded-md bg-muted px-3 py-2 text-sm leading-6 text-muted-foreground">
+                    {role.output}
                   </p>
                 </CardContent>
               </Card>
@@ -167,7 +231,7 @@ export default function JoinPage() {
           <SectionHeading
             eyebrow="FAQ"
             title="Before applying"
-            description="A few practical notes for prospective members."
+            description="The main reassurance: applicants do not need prior publication experience. Strong curiosity, reliability, and willingness to improve matter most."
           />
           <Accordion defaultValue={[joinFaq[0].question]} className="w-full">
             {joinFaq.map((item) => (
