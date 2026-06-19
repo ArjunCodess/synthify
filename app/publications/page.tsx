@@ -6,7 +6,7 @@ import { MagazineCard } from "@/components/site/magazine-card"
 import { SectionHeading } from "@/components/site/section-heading"
 import { JsonLd } from "@/components/seo/json-ld"
 import { buttonVariants } from "@/components/ui/button-variants"
-import { externalLinks, magazines } from "@/lib/content"
+import { issuuArchives, magazines } from "@/lib/content"
 import {
   absoluteUrl,
   createBreadcrumbJsonLd,
@@ -86,23 +86,45 @@ export default function PublicationsPage() {
           <SectionHeading
             eyebrow="Publications"
             title="The 2026 Synthify library."
-            description="Cover previews are lightweight images. Full PDFs open only when selected, keeping the page fast while preserving the original magazines."
+            description="Cover previews are lightweight images. Full PDFs open only when selected, keeping the page fast while preserving the original magazines. Issuu archives are split by publication year."
             level={1}
           />
-          <div>
-            <a
-              href={externalLinks.publications}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants({ size: "lg" }))}
-            >
-              Open latest issues on Issuu
-              <HugeiconsIcon
-                icon={ArrowUpRight01Icon}
-                strokeWidth={1.8}
-                data-icon="inline-end"
-              />
-            </a>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {issuuArchives.map((archive) => (
+              <a
+                key={archive.href}
+                href={archive.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex min-h-32 flex-col justify-between rounded-xl border border-border bg-card/90 p-5 transition-colors hover:border-primary/45 hover:bg-card"
+              >
+                <span className="text-sm font-medium text-muted-foreground">
+                  {archive.years}
+                </span>
+                <span className="flex items-end justify-between gap-4">
+                  <span className="flex flex-col gap-2">
+                    <span className="font-heading text-3xl leading-none">
+                      {archive.label}
+                    </span>
+                    <span className="max-w-md text-sm leading-6 text-muted-foreground">
+                      {archive.description}
+                    </span>
+                  </span>
+                  <span
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "icon" }),
+                      "shrink-0 group-hover:border-primary/45"
+                    )}
+                    aria-hidden="true"
+                  >
+                    <HugeiconsIcon
+                      icon={ArrowUpRight01Icon}
+                      strokeWidth={1.8}
+                    />
+                  </span>
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </section>

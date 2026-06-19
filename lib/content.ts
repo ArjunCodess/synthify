@@ -30,12 +30,29 @@ export type ExecutiveMember = {
   note: string
 }
 
+export const issuuArchives = [
+  {
+    label: "2026 issues",
+    years: "2026",
+    href: "https://issuu.com/synthifyofficial_",
+    description:
+      "Current Synthify issues published under the active Issuu profile.",
+  },
+  {
+    label: "2023-2025 archive",
+    years: "2023-2025",
+    href: "https://issuu.com/synthify",
+    description: "Earlier Synthify issues from the original Issuu archive.",
+  },
+]
+
 export const externalLinks = {
   email: "choiminsung365@gmail.com",
   instagram: "https://www.instagram.com/synthifyofficial_/",
   application:
     "https://docs.google.com/forms/d/e/1FAIpQLSdBFO-Wn0yh6vOkvb7vK_fCOB3jTzpFbuKB-Q8kQmMgckYjyQ/viewform",
-  publications: "https://issuu.com/synthify",
+  publications: "https://issuu.com/synthifyofficial_",
+  legacyPublications: "https://issuu.com/synthify",
 }
 
 export const navItems: NavItem[] = [

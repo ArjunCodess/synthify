@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { externalLinks } from "@/lib/content"
+import { externalLinks, issuuArchives } from "@/lib/content"
 
 const productionUrl = "https://synthify.org"
 const vercelUrl =
@@ -93,7 +93,10 @@ export const organizationJsonLd = {
     "@type": "ImageObject",
     url: absoluteUrl("/logo.jpg"),
   },
-  sameAs: [externalLinks.instagram, externalLinks.publications],
+  sameAs: [
+    externalLinks.instagram,
+    ...issuuArchives.map((archive) => archive.href),
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     email: externalLinks.email,
