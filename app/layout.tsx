@@ -9,10 +9,8 @@ import { SiteHeader } from "@/components/site/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import {
   createJsonLdGraph,
-  ogImagePath,
   organizationJsonLd,
   siteConfig,
-  twitterImagePath,
   websiteJsonLd,
 } from "@/lib/seo"
 import { cn } from "@/lib/utils"
@@ -59,29 +57,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
-  },
-  openGraph: {
-    title: "Synthify | Student-Led STEM Magazines",
-    description: siteConfig.description,
-    url: "/",
-    siteName: siteConfig.name,
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: ogImagePath,
-        width: 1200,
-        height: 630,
-        type: "image/png",
-        alt: siteConfig.ogImageAlt,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Synthify | Student-Led STEM Magazines",
-    description: siteConfig.description,
-    images: [twitterImagePath],
   },
 }
 

@@ -12,9 +12,6 @@ function normalizeSiteUrl(url: string) {
   return withProtocol.replace(/\/$/, "")
 }
 
-export const ogImagePath = "/opengraph-image"
-export const twitterImagePath = "/twitter-image"
-
 export const siteConfig = {
   name: "Synthify",
   url: normalizeSiteUrl(
@@ -22,8 +19,6 @@ export const siteConfig = {
   ),
   description:
     "Synthify is an international student-led organization publishing accessible STEM magazines written by high school students.",
-  ogImageAlt:
-    "Synthify, a student-led STEM magazine publisher for high school students",
   keywords: [
     "Synthify",
     "student STEM magazine",
@@ -56,29 +51,6 @@ export function createPageMetadata({
     keywords: [...siteConfig.keywords, ...keywords],
     alternates: {
       canonical: path,
-    },
-    openGraph: {
-      title: `${title} | ${siteConfig.name}`,
-      description,
-      url: path,
-      siteName: siteConfig.name,
-      locale: "en_US",
-      type: "website",
-      images: [
-        {
-          url: ogImagePath,
-          width: 1200,
-          height: 630,
-          type: "image/png",
-          alt: siteConfig.ogImageAlt,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${title} | ${siteConfig.name}`,
-      description,
-      images: [twitterImagePath],
     },
   }
 }
