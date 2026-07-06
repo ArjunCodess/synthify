@@ -85,8 +85,8 @@ export const navItems: NavItem[] = [
 
 export const stats = [
   { value: "40+", label: "members" },
-  { value: "9+", label: "countries" },
-  { value: "20+", label: "high schools" },
+  { value: "18+", label: "countries" },
+  { value: "25+", label: "high schools" },
 ]
 
 export const magazines: MagazineIssue[] = [
@@ -301,7 +301,7 @@ export const joinFaq = [
   {
     question: "Where do members work from?",
     answer:
-      "Members collaborate internationally. The current organization includes students across 9+ countries and 20+ high schools.",
+      "Members collaborate internationally. The current organization includes students across 18+ countries and 25+ high schools.",
   },
   {
     question: "What happens after applying?",

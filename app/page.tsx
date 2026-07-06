@@ -45,12 +45,12 @@ export default function Page() {
       detail: "coordinating writing, editing, layout, and outreach",
     },
     {
-      value: "9+",
+      value: "18+",
       label: "countries",
       detail: "bringing student science perspectives across time zones",
     },
     {
-      value: "20+",
+      value: "25+",
       label: "high schools",
       detail: "feeding each issue with different classrooms and communities",
     },
@@ -87,7 +87,7 @@ export default function Page() {
           <div className="flex flex-col justify-center gap-8">
             <div className="flex w-fit items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur-md">
               <HugeiconsIcon icon={GlobalIcon} strokeWidth={1.8} />
-              <span>40+ members across 9+ countries</span>
+              <span>40+ members across 18+ countries</span>
             </div>
             <div className="flex max-w-4xl flex-col gap-6">
               <h1 className="font-heading text-6xl leading-[0.88] tracking-normal text-balance sm:text-7xl lg:text-8xl">
