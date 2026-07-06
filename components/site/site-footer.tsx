@@ -105,9 +105,17 @@ export function SiteFooter() {
           </div>
         </div>
         <Separator />
-        <p className="text-xs text-muted-foreground">
-          Synthify 2026. Built for readers, writers, editors, designers, and
-          outreach partners.
+        <p className="text-sm text-muted-foreground">
+          Synthify 2026. Website built by{" "}
+          <a
+            href="https://arjuncodess.is-a.dev/"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-foreground transition-colors hover:text-primary"
+          >
+            ArjunCodess
+          </a>
+          .
         </p>
       </div>
     </footer>
