@@ -1,9 +1,6 @@
 import Image from "next/image"
 import { HugeiconsIcon } from "@hugeicons/react"
-import {
-  ArrowUpRight01Icon,
-  Download01Icon,
-} from "@hugeicons/core-free-icons"
+import { ArrowUpRight01Icon, Download01Icon } from "@hugeicons/core-free-icons"
 
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "@/components/ui/badge"
@@ -21,11 +18,21 @@ import { cn } from "@/lib/utils"
 type MagazineCardProps = {
   issue: MagazineIssue
   priority?: boolean
+  className?: string
 }
 
-export function MagazineCard({ issue, priority = false }: MagazineCardProps) {
+export function MagazineCard({
+  issue,
+  priority = false,
+  className,
+}: MagazineCardProps) {
   return (
-    <Card className="group h-full overflow-hidden border-border/80 bg-card/95 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+    <Card
+      className={cn(
+        "group h-full overflow-hidden border-border/80 bg-card/95 shadow-sm transition-transform duration-300 hover:-translate-y-1",
+        className
+      )}
+    >
       <div className="grid h-full gap-0 md:grid-cols-[minmax(150px,0.78fr)_1fr]">
         <CardContent className="p-4 md:p-5">
           <AspectRatio

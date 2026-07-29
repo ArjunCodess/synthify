@@ -175,6 +175,21 @@ export const magazines: MagazineIssue[] = [
       "DNA Nanostructures for Controlled Drug Release",
     ],
   },
+  {
+    slug: "may-2026-special",
+    title: "May 2026 — Special Edition",
+    month: "May Special",
+    theme: "Innovation & Health",
+    pages: 9,
+    pdfHref: "/magazines/may26-special.pdf",
+    coverSrc: "/magazine-covers/may26-special.png",
+    published: "May 2026",
+    publishedDate: "2026-05-01",
+    articles: [
+      "Slowing Ageing at the Cellular Level",
+      "How Psychological Stress Affects Telomere Attrition",
+    ],
+  },
 ]
 
 export const executives: ExecutiveMember[] = [
@@ -188,8 +203,7 @@ export const executives: ExecutiveMember[] = [
     initials: "MC",
     summary:
       "Manages the overall process of magazine production and club operations while coordinating with department executives.",
-    goal:
-      "Minsung wants Synthify to share the joy of magazines and make student-written science accessible to more readers.",
+    goal: "Minsung wants Synthify to share the joy of magazines and make student-written science accessible to more readers.",
     note: "Does anyone have sauce?",
   },
   {
@@ -202,8 +216,7 @@ export const executives: ExecutiveMember[] = [
     initials: "RA",
     summary:
       "Collaborates with editorial leadership, guides journalism members, and helps choose the direction of each issue.",
-    goal:
-      "Ryan hopes Synthify helps readers feel the same curiosity and excitement that first drew him to STEM.",
+    goal: "Ryan hopes Synthify helps readers feel the same curiosity and excitement that first drew him to STEM.",
     note: "You don't have to be great to start, but you have to start to be great.",
   },
   {
@@ -216,8 +229,7 @@ export const executives: ExecutiveMember[] = [
     initials: "PB",
     summary:
       "Supports editors, manages deadlines, sets agendas, and helps produce coherent publication-ready issues.",
-    goal:
-      "Pramith joined Synthify to make STEM reading more accessible while refining proofreading and editing skills.",
+    goal: "Pramith joined Synthify to make STEM reading more accessible while refining proofreading and editing skills.",
     note: "Excellence is a habit.",
   },
   {
@@ -230,8 +242,7 @@ export const executives: ExecutiveMember[] = [
     initials: "SL",
     summary:
       "Works alongside the president to manage departments, oversee publications, and expand Synthify through events.",
-    goal:
-      "Soobin wants every teenager to have the opportunity to explore scientific knowledge through accessible magazines.",
+    goal: "Soobin wants every teenager to have the opportunity to explore scientific knowledge through accessible magazines.",
     note: "Make it happen.",
   },
   {
@@ -244,8 +255,7 @@ export const executives: ExecutiveMember[] = [
     initials: "MJ",
     summary:
       "Leads promotion and donation projects while building partnerships with organizations in Korea and abroad.",
-    goal:
-      "Minseo works to expand Synthify's presence through global connections and outreach initiatives.",
+    goal: "Minseo works to expand Synthify's presence through global connections and outreach initiatives.",
     note: "Passionate about creating meaningful impact.",
   },
   {
@@ -258,8 +268,7 @@ export const executives: ExecutiveMember[] = [
     initials: "AC",
     summary:
       "Transforms complex scientific content into clear visual narratives that balance accuracy and creativity.",
-    goal:
-      "Ayeon wants Synthify to grow into a leading student-driven science organization shaped by each member's insight.",
+    goal: "Ayeon wants Synthify to grow into a leading student-driven science organization shaped by each member's insight.",
     note: "It is not in the stars to hold our destiny but in ourselves.",
   },
 ]
