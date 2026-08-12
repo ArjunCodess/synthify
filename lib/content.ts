@@ -190,6 +190,29 @@ export const magazines: MagazineIssue[] = [
       "How Psychological Stress Affects Telomere Attrition",
     ],
   },
+  {
+    slug: "june-july-2026",
+    title: "June & July 2026",
+    month: "June & July",
+    theme: "Pandemics & Public Health",
+    pages: 58,
+    pdfHref: "/magazines/june&july26.pdf",
+    coverSrc: "/magazine-covers/june-july26.png",
+    published: "June & July 2026",
+    publishedDate: "2026-07-01",
+    articles: [
+      "Why Mosquitoes Are the Deadliest Animals on Earth",
+      "Who Was Patient Zero?",
+      "The Recurring Catastrophe of the Twenty-First Century: The RNA Viruses",
+      "How the Ebola Virus Tricks Human Cells",
+      "Hanta Virus, The Outbreak!",
+      "How Viruses Mutate and Create New Variants",
+      "Horseshoe Crabs",
+      "When Your Immune System Turns Against You: Understanding Cytokine Storms",
+      "How the Basic Reproductive Number Shapes Pandemic Responses",
+      "AI and Disease Outbreak Prediction: How Artificial Intelligence Can Help Prevent Future Pandemics",
+    ],
+  },
 ]
 
 export const executives: ExecutiveMember[] = [
